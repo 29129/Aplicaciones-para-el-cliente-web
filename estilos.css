@@ -1,0 +1,76 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    background: linear-gradient(90deg, rgb(165, 216, 218), rgb(68, 123, 126));
+}
+
+header {
+    height: 80px;
+    padding-top: 1px;
+    background-color: rgb(29, 117, 121);
+    text-align: center;
+}
+
+#datos {
+    margin: 20px auto;
+    width: 93%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background-color: rgb(46, 180, 187);
+    
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 15px;
+    gap: 15px;
+}
+
+.contenedor-datos {
+    flex: 1;
+}
+
+.contenedor-datos h2 {
+    margin: 0;
+    text-align: center;
+}
+
+.texto p {
+    font-size: 18px;
+}
+.foto {
+    width: 150px;
+    border-radius: 8px;
+}
+
+.info h2{
+    padding-top: 20px;
+    margin: 0;
+    text-align: center;
+}
+
+.texto2 {
+    font-size: 18px;
+    margin-left: 30px;
+}
+
+.tabla {
+    width: 90%;
+    padding: 1% 10%;
+}
+
+.tabla thead{
+    color: aliceblue;
+    background-color: rgb(4, 0, 0);
+}
+
+.tabla thead:hover{
+    color: brown;
+}
+
+.tabla tbody{
+    background-color: rgb(252, 252, 252);
+}
+
+.tabla tbody:hover{
+    color:  aquamarine;
+}
