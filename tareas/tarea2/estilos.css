@@ -73,30 +73,25 @@ header {
 
 /* Tabla de referencias personales */
 .tabla {
-    width: 90%;
-    padding: 1% 10%;
+    width: 70%;
+    border-collapse: collapse;
+    margin: 20px auto;
 }
 
+.tabla th, .tabla td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
 .tabla thead {
-    color: aliceblue;
-    background-color: rgb(4, 0, 0);
-}
-
-.tabla thead:hover {
-    background: linear-gradient(90deg, 
-        #ff0000, #ff7f00, #ffff00, 
-        #00ff00, #00ffff, #0000ff, #8b00ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% 100%;
-    animation: rainbow 4s linear infinite;
+    background-color: rgb(28, 94, 149);
 }
 
 .tabla tbody {
     background-color: rgb(252, 252, 252);
 }
 
-.tabla tbody:hover {
+.tabla td:hover {
     background: linear-gradient(90deg, 
         #ff0000, #ff7f00, #ffff00, 
         #00ff00, #00ffff, #0000ff, #8b00ff);
@@ -108,6 +103,7 @@ header {
 
 /* Animación arcoíris para la tabla */
 @keyframes rainbow {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 200% 0%; }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
