@@ -1,9 +1,11 @@
+/* Estilos generales del cuerpo */
 body {
     font-family: 'Times New Roman', Times, serif;
     margin: 0;
     background: linear-gradient(90deg, rgb(165, 216, 218), rgb(68, 123, 126));
 }
 
+/* Encabezado */
 header {
     height: 80px;
     padding-top: 1px;
@@ -11,6 +13,7 @@ header {
     text-align: center;
 }
 
+/* Contenedor principal de datos personales */
 #datos {
     margin: 20px auto;
     width: 93%;
@@ -25,6 +28,7 @@ header {
     gap: 15px;
 }
 
+/* Contenedor de texto de datos personales */
 .contenedor-datos {
     flex: 1;
 }
@@ -37,12 +41,26 @@ header {
 .texto p {
     font-size: 18px;
 }
+
+/* Foto con efecto hover para cambiar imagen */
 .foto {
     width: 150px;
+    height: 200px;
     border-radius: 8px;
+    background-image: url('foto.jpeg');
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    transition: background-image 0.3s;
+    flex-shrink: 0;
 }
 
-.info h2{
+.foto:hover {
+    background-image: url('foto2.jpeg');
+}
+
+/* Secciones de información */
+.info h2 {
     padding-top: 20px;
     margin: 0;
     text-align: center;
@@ -53,24 +71,43 @@ header {
     margin-left: 30px;
 }
 
+/* Tabla de referencias personales */
 .tabla {
     width: 90%;
     padding: 1% 10%;
 }
 
-.tabla thead{
+.tabla thead {
     color: aliceblue;
     background-color: rgb(4, 0, 0);
 }
 
-.tabla thead:hover{
-    color: brown;
+.tabla thead:hover {
+    background: linear-gradient(90deg, 
+        #ff0000, #ff7f00, #ffff00, 
+        #00ff00, #00ffff, #0000ff, #8b00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    animation: rainbow 4s linear infinite;
 }
 
-.tabla tbody{
+.tabla tbody {
     background-color: rgb(252, 252, 252);
 }
 
-.tabla tbody:hover{
-    color:  aquamarine;
+.tabla tbody:hover {
+    background: linear-gradient(90deg, 
+        #ff0000, #ff7f00, #ffff00, 
+        #00ff00, #00ffff, #0000ff, #8b00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    animation: rainbow 4s linear infinite;
+}
+
+/* Animación arcoíris para la tabla */
+@keyframes rainbow {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
 }

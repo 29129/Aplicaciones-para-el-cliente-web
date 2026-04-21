@@ -1,30 +1,52 @@
+/* ========== ESTILOS GENERALES DEL CUERPO ========== */
 body {
     margin: 0;
+    /* Fuente moderna y limpia */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Fondo gris claro */
     background-color: #f4f7f6;
+    /* Color de texto gris oscuro */
     color: #333;
+    /* Altura de línea para mejor legibilidad */
     line-height: 1.6;
 }
 
+/* ========== ESTILOS DEL ENCABEZADO ========== */
 header {
+    /* Fondo oscuro azulado */
     background: #2c3e50;
+    /* Texto en blanco */
     color: white;
+    /* Centrar el contenido */
     text-align: center;
+    /* Espaciado interno */
     padding: 2rem 0;
 }
 
+/* ========== SECCIÓN CONTENEDOR (SOBRE MÍ) ========== */
 .contenedor {
+    /* Ancho del 80% del viewport */
     width: 80%;
+    /* Centrar horizontalmente */
     margin: 20px auto;
+    /* Fondo blanco */
     background: white;
+    /* Espaciado interno */
     padding: 30px;
+    /* Esquinas redondeadas */
     border-radius: 8px;
+    /* Sombra suave */
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+/* ========== SECCIÓN DE HABILIDADES ========== */
 .habilidades {
+    /* Usar flexbox para distribuir elementos */
     display: flex;
+    /* Distribuir espacio equitativo entre elementos */
     justify-content: space-around;
+    /* Remover viñetas de lista */
     list-style: none;
+    /* Remover espaciado por defecto */
     padding: 0;
 }
