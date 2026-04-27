@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Clientes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Registro de Clientes</h1>
+
+    <form id="formCliente">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="apellido" placeholder="Apellido" required>
+        <input type="number" id="edad" placeholder="Edad" required>
+        <input type="email" id="email" placeholder="Correo" required>
+        <button type="submit">Guardar</button>
+    </form>
+
+    <h2>Lista de Clientes</h2>
+
+    <table id="tablaClientes">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <!-- JAVASCRIPT DENTRO DEL HTML -->
+    <script>
+        document.getElementById("formCliente").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            let nombre = document.getElementById("nombre").value;
+            let apellido = document.getElementById("apellido").value;
+            let edad = document.getElementById("edad").value;
+            let email = document.getElementById("email").value;
+
+            if (!nombre || !apellido || !edad || !email) {
+                alert("Complete todos los campos");
+                return;
+            }
+
+            let tabla = document.getElementById("tablaClientes").querySelector("tbody");
+
+            let fila = document.createElement("tr");
+
+            fila.innerHTML = `
+                <td>${nombre}</td>
+                <td>${apellido}</td>
+                <td>${edad}</td>
+                <td>${email}</td>
+            `;
+
+            tabla.appendChild(fila);
+
+            document.getElementById("formCliente").reset();
+        });
+    </script>
+
+</body>
+</html>
