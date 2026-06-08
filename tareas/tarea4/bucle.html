@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operaciones con Bucle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Operaciones Matemáticas con Bucle</h1>
+        <div class="input-group">
+            <label for="num1">Primer número:</label>
+            <input type="number" id="num1" required>
+        </div>
+        <div class="input-group">
+            <label for="num2">Segundo número:</label>
+            <input type="number" id="num2" required>
+        </div>
+        <button onclick="realizarOperaciones()">Realizar Operaciones</button>
+        <div class="results" id="results"></div>
+    </div>
+
+    <script>
+        function realizarOperaciones() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const resultsDiv = document.getElementById('results');
+
+            // Validar que se hayan ingresado números
+            if (isNaN(num1) || isNaN(num2)) {
+                resultsDiv.innerHTML = '<div class="result-item error">Por favor, ingrese números válidos.</div>';
+                return;
+            }
+
+            const operaciones = [
+                { nombre: 'SUMA', simbolo: '+', funcion: (a, b) => a + b },
+                { nombre: 'RESTA', simbolo: '-', funcion: (a, b) => a - b },
+                { nombre: 'MULTIPLICACIÓN', simbolo: '*', funcion: (a, b) => a * b },
+                { nombre: 'DIVISIÓN', simbolo: '/', funcion: (a, b) => {
+                    if (b === 0) return 'Error: División por cero';
+                    return a / b;
+                }},
+                { nombre: 'MÓDULO', simbolo: '%', funcion: (a, b) => {
+                    if (b === 0) return 'Error: Módulo por cero';
+                    return a % b;
+                }}
+            ];
+
+            let resultadosHTML = '';
+
+            for (let i = 0; i < operaciones.length; i++) {
+                const operacion = operaciones[i];
+                const resultado = operacion.funcion(num1, num2);
+                resultadosHTML += `
+                    <div class="result-item">
+                        <strong>Iteración ${i + 1} - ${operacion.nombre}:</strong><br>
+                        ${num1} ${operacion.simbolo} ${num2} = ${resultado}
+                    </div>
+                `;
+            }
+
+            resultsDiv.innerHTML = resultadosHTML;
+        }
+    </script>
+</body>
+</html>

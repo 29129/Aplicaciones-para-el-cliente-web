@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Estudiantes - ULEAM</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="admin-page">
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <img src="logo.png" alt="Logo ULEAM" class="logo-sidebar">
+            <h2>Sistema ULEAM</h2>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="admin.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="estudiantes.html" class="active"><i class="fas fa-users"></i> Estudiantes</a></li>
+                <li><a href="seguimiento.html"><i class="fas fa-chart-line"></i> Seguimiento</a></li>
+                <li><a href="reportes.html"><i class="fas fa-file-alt"></i> Reportes</a></li>
+                <li><a href="usuarios.html"><i class="fas fa-user-cog"></i> Usuarios</a></li>
+                <li><a href="configuracion.html"><i class="fas fa-cog"></i> Configuración</a></li>
+                <li><a href="inicio.html"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <div class="main-content">
+        <header class="header">
+            <div class="header-left">
+                <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Abrir menú lateral">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>Gestión de Estudiantes</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <span class="user-name">Administrador</span>
+                    <span class="user-role">Admin</span>
+                </div>
+                <button class="notification-btn" aria-label="Ver notificaciones">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="dashboard">
+            <section class="page-heading">
+                <div>
+                    <h2>Estudiantes Registrados</h2>
+                    <p>Consulta, filtra y da seguimiento a los estudiantes registrados en el sistema.</p>
+                </div>
+                <a class="primary-action" href="registro-estudiante.html">
+                    <i class="fas fa-user-plus"></i>
+                    Registrar estudiante
+                </a>
+            </section>
+
+            <section class="summary-grid compact-summary">
+                <article class="summary-card">
+                    <span class="summary-label">Registrados</span>
+                    <strong>150</strong>
+                </article>
+                <article class="summary-card">
+                    <span class="summary-label">Activos</span>
+                    <strong>120</strong>
+                </article>
+                <article class="summary-card">
+                    <span class="summary-label">En seguimiento</span>
+                    <strong>25</strong>
+                </article>
+                <article class="summary-card">
+                    <span class="summary-label">Inactivos</span>
+                    <strong>30</strong>
+                </article>
+            </section>
+
+            <section class="filters-section" aria-label="Filtros de estudiantes">
+                <div class="search-field">
+                    <label for="student-search">Buscar estudiante</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <input type="search" id="student-search" placeholder="Nombre, cédula o correo">
+                    </div>
+                </div>
+
+                <div class="filter-field">
+                    <label for="career-filter">Carrera</label>
+                    <select id="career-filter">
+                        <option value="">Todas</option>
+                        <option value="Ingeniería Civil">Ingeniería Civil</option>
+                        <option value="Medicina">Medicina</option>
+                        <option value="Derecho">Derecho</option>
+                        <option value="Psicología">Psicología</option>
+                        <option value="Administración">Administración</option>
+                    </select>
+                </div>
+
+                <div class="filter-field">
+                    <label for="disability-filter">Tipo</label>
+                    <select id="disability-filter">
+                        <option value="">Todos</option>
+                        <option value="Motora">Motora</option>
+                        <option value="Visual">Visual</option>
+                        <option value="Auditiva">Auditiva</option>
+                        <option value="Intelectual">Intelectual</option>
+                    </select>
+                </div>
+
+                <div class="filter-field">
+                    <label for="status-filter">Estado</label>
+                    <select id="status-filter">
+                        <option value="">Todos</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                        <option value="En seguimiento">En seguimiento</option>
+                    </select>
+                </div>
+
+                <button class="secondary-action" id="clear-filters" type="button">
+                    <i class="fas fa-eraser"></i>
+                    Limpiar
+                </button>
+            </section>
+
+            <section class="table-section students-management">
+                <div class="section-title-row">
+                    <h2>Listado de estudiantes</h2>
+                    <span id="results-count">6 registros</span>
+                </div>
+                <table class="students-table management-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Cédula</th>
+                            <th>Carrera</th>
+                            <th>Tipo de discapacidad</th>
+                            <th>Estado</th>
+                            <th>Último seguimiento</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="students-table-body">
+                        <tr data-name="María González" data-id="1312456789" data-email="maria.gonzalez@uleam.edu.ec" data-career="Ingeniería Civil" data-disability="Motora" data-status="Activo">
+                            <td><strong>María González</strong><span>maria.gonzalez@uleam.edu.ec</span></td>
+                            <td>1312456789</td>
+                            <td>Ingeniería Civil</td>
+                            <td>Motora</td>
+                            <td><span class="status active">Activo</span></td>
+                            <td>08/05/2026</td>
+                            <td>
+                                <button class="action-btn view" aria-label="Ver estudiante"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit" aria-label="Editar estudiante"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn follow" aria-label="Registrar seguimiento"><i class="fas fa-clipboard-list"></i></button>
+                            </td>
+                        </tr>
+                        <tr data-name="Juan Pérez" data-id="1309876543" data-email="juan.perez@uleam.edu.ec" data-career="Medicina" data-disability="Visual" data-status="Inactivo">
+                            <td><strong>Juan Pérez</strong><span>juan.perez@uleam.edu.ec</span></td>
+                            <td>1309876543</td>
+                            <td>Medicina</td>
+                            <td>Visual</td>
+                            <td><span class="status inactive">Inactivo</span></td>
+                            <td>22/04/2026</td>
+                            <td>
+                                <button class="action-btn view" aria-label="Ver estudiante"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit" aria-label="Editar estudiante"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn follow" aria-label="Registrar seguimiento"><i class="fas fa-clipboard-list"></i></button>
+                            </td>
+                        </tr>
+                        <tr data-name="Ana López" data-id="1311122233" data-email="ana.lopez@uleam.edu.ec" data-career="Derecho" data-disability="Auditiva" data-status="Activo">
+                            <td><strong>Ana López</strong><span>ana.lopez@uleam.edu.ec</span></td>
+                            <td>1311122233</td>
+                            <td>Derecho</td>
+                            <td>Auditiva</td>
+                            <td><span class="status active">Activo</span></td>
+                            <td>09/05/2026</td>
+                            <td>
+                                <button class="action-btn view" aria-label="Ver estudiante"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit" aria-label="Editar estudiante"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn follow" aria-label="Registrar seguimiento"><i class="fas fa-clipboard-list"></i></button>
+                            </td>
+                        </tr>
+                        <tr data-name="Carlos Rodríguez" data-id="1319988776" data-email="carlos.rodriguez@uleam.edu.ec" data-career="Psicología" data-disability="Intelectual" data-status="En seguimiento">
+                            <td><strong>Carlos Rodríguez</strong><span>carlos.rodriguez@uleam.edu.ec</span></td>
+                            <td>1319988776</td>
+                            <td>Psicología</td>
+                            <td>Intelectual</td>
+                            <td><span class="status tracking">En seguimiento</span></td>
+                            <td>10/05/2026</td>
+                            <td>
+                                <button class="action-btn view" aria-label="Ver estudiante"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit" aria-label="Editar estudiante"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn follow" aria-label="Registrar seguimiento"><i class="fas fa-clipboard-list"></i></button>
+                            </td>
+                        </tr>
+                        <tr data-name="Daniela Zambrano" data-id="1304567890" data-email="daniela.zambrano@uleam.edu.ec" data-career="Administración" data-disability="Motora" data-status="Activo">
+                            <td><strong>Daniela Zambrano</strong><span>daniela.zambrano@uleam.edu.ec</span></td>
+                            <td>1304567890</td>
+                            <td>Administración</td>
+                            <td>Motora</td>
+                            <td><span class="status active">Activo</span></td>
+                            <td>06/05/2026</td>
+                            <td>
+                                <button class="action-btn view" aria-label="Ver estudiante"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit" aria-label="Editar estudiante"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn follow" aria-label="Registrar seguimiento"><i class="fas fa-clipboard-list"></i></button>
+                            </td>
+                        </tr>
+                        <tr data-name="Luis Mero" data-id="1315678901" data-email="luis.mero@uleam.edu.ec" data-career="Medicina" data-disability="Auditiva" data-status="En seguimiento">
+                            <td><strong>Luis Mero</strong><span>luis.mero@uleam.edu.ec</span></td>
+                            <td>1315678901</td>
+                            <td>Medicina</td>
+                            <td>Auditiva</td>
+                            <td><span class="status tracking">En seguimiento</span></td>
+                            <td>07/05/2026</td>
+                            <td>
+                                <button class="action-btn view" aria-label="Ver estudiante"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit" aria-label="Editar estudiante"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn follow" aria-label="Registrar seguimiento"><i class="fas fa-clipboard-list"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="empty-state" id="empty-state" hidden>No se encontraron estudiantes con esos filtros.</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+    <script src="estudiantes.js"></script>
+</body>
+</html>

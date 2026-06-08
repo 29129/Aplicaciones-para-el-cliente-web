@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Estudiante - ULEAM</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="admin-page">
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <img src="logo.png" alt="Logo ULEAM" class="logo-sidebar">
+            <h2>Sistema ULEAM</h2>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="admin.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="estudiantes.html" class="active"><i class="fas fa-users"></i> Estudiantes</a></li>
+                <li><a href="seguimiento.html"><i class="fas fa-chart-line"></i> Seguimiento</a></li>
+                <li><a href="reportes.html"><i class="fas fa-file-alt"></i> Reportes</a></li>
+                <li><a href="usuarios.html"><i class="fas fa-user-cog"></i> Usuarios</a></li>
+                <li><a href="configuracion.html"><i class="fas fa-cog"></i> Configuración</a></li>
+                <li><a href="inicio.html"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <div class="main-content">
+        <header class="header">
+            <div class="header-left">
+                <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Abrir menú lateral">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="breadcrumb" aria-label="Ruta actual">
+                    <a href="estudiantes.html">Estudiantes</a>
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                    <span>Registrar estudiante</span>
+                </nav>
+            </div>
+            <div class="header-right">
+                <button class="notification-btn" aria-label="Ver notificaciones">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="user-info">
+                    <span class="user-name">Administrador</span>
+                    <span class="user-role">Admin</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard register-dashboard">
+            <section class="register-heading">
+                <div class="register-title">
+                    <div class="register-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div>
+                        <h1>Registro de estudiante</h1>
+                        <p>Complete la información del estudiante en los siguientes formularios.</p>
+                    </div>
+                </div>
+                <div class="register-actions">
+                    <a class="secondary-action" href="estudiantes.html">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                    </a>
+                    <button class="primary-action" type="submit" form="student-register-form">
+                        <i class="fas fa-save"></i>
+                        Guardar registro
+                    </button>
+                </div>
+            </section>
+
+            <form id="student-register-form" class="student-form" novalidate>
+                <section class="form-shell">
+                    <nav class="form-steps" aria-label="Pasos del registro">
+                        <button class="step-tab active" type="button" data-step-target="personal">1. Datos personales</button>
+                        <button class="step-tab" type="button" data-step-target="academicos">2. Datos académicos</button>
+                        <button class="step-tab" type="button" data-step-target="discapacidad">3. Discapacidad</button>
+                        <button class="step-tab" type="button" data-step-target="apoyos">4. Tipo de apoyo y adaptaciones</button>
+                    </nav>
+
+                    <article class="form-card" id="personal">
+                        <h2>Datos personales</h2>
+                        <div class="form-grid four-columns">
+                            <label class="form-field required">
+                                <span>Nombres</span>
+                                <input type="text" name="nombres" placeholder="Ingrese los nombres" required>
+                            </label>
+                            <label class="form-field required">
+                                <span>Apellidos</span>
+                                <input type="text" name="apellidos" placeholder="Ingrese los apellidos" required>
+                            </label>
+                            <label class="form-field required">
+                                <span>Cédula</span>
+                                <input type="text" name="cedula" placeholder="Ingrese la cédula" required>
+                            </label>
+                            <label class="form-field required">
+                                <span>Fecha de nacimiento</span>
+                                <input type="date" name="fecha_nacimiento" required>
+                            </label>
+                            <label class="form-field required">
+                                <span>Género</span>
+                                <select name="genero" required>
+                                    <option value="">Seleccione</option>
+                                    <option>Femenino</option>
+                                    <option>Masculino</option>
+                                    <option>Otro</option>
+                                </select>
+                            </label>
+                            <label class="form-field">
+                                <span>Teléfono</span>
+                                <input type="tel" name="telefono" placeholder="Ingrese número de teléfono">
+                            </label>
+                            <label class="form-field required">
+                                <span>Correo institucional</span>
+                                <input type="email" name="correo_institucional" placeholder="ejemplo@uleam.edu.ec" required>
+                            </label>
+                            <label class="form-field">
+                                <span>Correo personal</span>
+                                <input type="email" name="correo_personal" placeholder="Ingrese correo personal">
+                            </label>
+                            <label class="form-field wide">
+                                <span>Dirección</span>
+                                <input type="text" name="direccion" placeholder="Ingrese la dirección domiciliaria">
+                            </label>
+                            <label class="form-field required">
+                                <span>Contacto de emergencia</span>
+                                <input type="text" name="contacto_emergencia" placeholder="Ingrese nombre del contacto" required>
+                            </label>
+                            <label class="form-field required">
+                                <span>Teléfono de emergencia</span>
+                                <input type="tel" name="telefono_emergencia" placeholder="Ingrese teléfono" required>
+                            </label>
+                            <label class="form-field required">
+                                <span>Relación</span>
+                                <select name="relacion" required>
+                                    <option value="">Seleccione</option>
+                                    <option>Madre/Padre</option>
+                                    <option>Hermano/a</option>
+                                    <option>Familiar</option>
+                                    <option>Representante</option>
+                                </select>
+                            </label>
+                        </div>
+                    </article>
+
+                    <article class="form-card" id="academicos">
+                        <h2>Datos académicos</h2>
+                        <div class="form-grid five-columns">
+                            <label class="form-field required">
+                                <span>Facultad</span>
+                                <select name="facultad" required>
+                                    <option value="">Seleccione facultad</option>
+                                    <option>Ingeniería</option>
+                                    <option>Ciencias de la Salud</option>
+                                    <option>Derecho</option>
+                                    <option>Administración</option>
+                                </select>
+                            </label>
+                            <label class="form-field required">
+                                <span>Carrera</span>
+                                <select name="carrera" required>
+                                    <option value="">Seleccione carrera</option>
+                                    <option>Ingeniería Civil</option>
+                                    <option>Medicina</option>
+                                    <option>Derecho</option>
+                                    <option>Psicología</option>
+                                    <option>Administración</option>
+                                </select>
+                            </label>
+                            <label class="form-field required">
+                                <span>Nivel / Semestre</span>
+                                <select name="nivel" required>
+                                    <option value="">Seleccione</option>
+                                    <option>Primero</option>
+                                    <option>Segundo</option>
+                                    <option>Tercero</option>
+                                    <option>Cuarto</option>
+                                    <option>Quinto</option>
+                                </select>
+                            </label>
+                            <label class="form-field required">
+                                <span>Jornada</span>
+                                <select name="jornada" required>
+                                    <option value="">Seleccione</option>
+                                    <option>Matutina</option>
+                                    <option>Vespertina</option>
+                                    <option>Nocturna</option>
+                                </select>
+                            </label>
+                            <label class="form-field">
+                                <span>Paralelo</span>
+                                <input type="text" name="paralelo" placeholder="Ingrese paralelo">
+                            </label>
+                            <label class="form-field required">
+                                <span>Estado académico</span>
+                                <select name="estado_academico" required>
+                                    <option value="">Seleccione estado</option>
+                                    <option>Activo</option>
+                                    <option>Retirado</option>
+                                    <option>Egresado</option>
+                                </select>
+                            </label>
+                            <label class="form-field">
+                                <span>Fecha de ingreso</span>
+                                <input type="date" name="fecha_ingreso">
+                            </label>
+                            <label class="form-field">
+                                <span>Periodo académico actual</span>
+                                <select name="periodo">
+                                    <option value="">Seleccione periodo</option>
+                                    <option>2026-1</option>
+                                    <option>2026-2</option>
+                                </select>
+                            </label>
+                        </div>
+                    </article>
+
+                    <article class="form-card" id="discapacidad">
+                        <h2>Discapacidad</h2>
+                        <div class="form-grid four-columns">
+                            <label class="form-field required">
+                                <span>Tipo de discapacidad</span>
+                                <select name="tipo_discapacidad" required>
+                                    <option value="">Seleccione tipo</option>
+                                    <option>Motora</option>
+                                    <option>Visual</option>
+                                    <option>Auditiva</option>
+                                    <option>Intelectual</option>
+                                    <option>Psicosocial</option>
+                                </select>
+                            </label>
+                            <label class="form-field">
+                                <span>Grado de discapacidad (%)</span>
+                                <input type="number" name="grado_discapacidad" min="0" max="100" placeholder="Ingrese porcentaje">
+                            </label>
+                            <label class="form-field wide">
+                                <span>Diagnóstico</span>
+                                <input type="text" name="diagnostico" placeholder="Ingrese diagnóstico o descripción">
+                            </label>
+                            <label class="form-field required">
+                                <span>¿Cuenta con certificado?</span>
+                                <select name="certificado" required>
+                                    <option value="">Seleccione</option>
+                                    <option>Sí</option>
+                                    <option>No</option>
+                                </select>
+                            </label>
+                            <label class="form-field wide">
+                                <span>Institución que certifica</span>
+                                <input type="text" name="institucion_certifica" placeholder="Ingrese institución que certifica">
+                            </label>
+                            <label class="form-field wide">
+                                <span>N° de certificado</span>
+                                <input type="text" name="numero_certificado" placeholder="Ingrese número de certificado">
+                            </label>
+                        </div>
+                        <p class="form-note">
+                            <i class="fas fa-info-circle"></i>
+                            La información registrada será tratada con confidencialidad y utilizada únicamente para fines académicos y de apoyo.
+                        </p>
+                    </article>
+
+                    <article class="form-card" id="apoyos">
+                        <h2>Tipo de apoyo y adaptaciones</h2>
+                        <div class="form-grid two-columns">
+                            <label class="form-field">
+                                <span>Tipo de apoyo requerido</span>
+                                <select name="tipo_apoyo">
+                                    <option value="">Seleccione apoyo</option>
+                                    <option>Acompañamiento académico</option>
+                                    <option>Adaptación curricular</option>
+                                    <option>Apoyo tecnológico</option>
+                                    <option>Accesibilidad física</option>
+                                </select>
+                            </label>
+                            <label class="form-field">
+                                <span>Frecuencia de seguimiento</span>
+                                <select name="frecuencia">
+                                    <option value="">Seleccione frecuencia</option>
+                                    <option>Semanal</option>
+                                    <option>Quincenal</option>
+                                    <option>Mensual</option>
+                                </select>
+                            </label>
+                            <label class="form-field full">
+                                <span>Adaptaciones sugeridas</span>
+                                <textarea name="adaptaciones" rows="4" placeholder="Describa las adaptaciones o apoyos necesarios"></textarea>
+                            </label>
+                            <label class="form-field full">
+                                <span>Observaciones</span>
+                                <textarea name="observaciones" rows="4" placeholder="Ingrese observaciones adicionales"></textarea>
+                            </label>
+                        </div>
+                    </article>
+                </section>
+
+                <div class="form-footer">
+                    <button class="secondary-action" id="previous-step" type="button">
+                        <i class="fas fa-chevron-left"></i>
+                        Anterior
+                    </button>
+                    <button class="primary-action" id="next-step" type="button">
+                        Siguiente
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script src="admin.js"></script>
+    <script src="registro-estudiante.js"></script>
+</body>
+</html>
