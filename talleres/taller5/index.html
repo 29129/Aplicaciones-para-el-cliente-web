@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registro de Estudiantes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Registro de Estudiantes</h1>
+
+    <form id="studentForm" novalidate>
+      <div class="row">
+        <label for="cedula">Cédula</label>
+        <input id="cedula" name="cedula" required />
+        <small class="error" id="err-cedula"></small>
+      </div>
+
+      <div class="row">
+        <label for="apellidos">Apellidos</label>
+        <input id="apellidos" name="apellidos" required />
+        <small class="error" id="err-apellidos"></small>
+      </div>
+
+      <div class="row">
+        <label for="nombres">Nombres</label>
+        <input id="nombres" name="nombres" required />
+        <small class="error" id="err-nombres"></small>
+      </div>
+
+      <div class="row">
+        <label for="direccion">Dirección</label>
+        <input id="direccion" name="direccion" />
+        <small class="error" id="err-direccion"></small>
+      </div>
+
+      <div class="row">
+        <label for="telefono">Teléfono</label>
+        <input id="telefono" name="telefono" />
+        <small class="error" id="err-telefono"></small>
+      </div>
+
+      <div class="row">
+        <label for="email">Correo Electrónico</label>
+        <input id="email" name="email" />
+        <small class="error" id="err-email"></small>
+      </div>
+
+      <div class="row">
+        <label for="facultad">Facultad</label>
+        <select id="facultad" name="facultad" required>
+          <option value="">--Seleccione--</option>
+          <option>Ingeniería</option>
+          <option>Ciencias</option>
+          <option>Educación</option>
+          <option>Administración</option>
+        </select>
+        <small class="error" id="err-facultad"></small>
+      </div>
+
+      <div class="row">
+        <label for="nivel">Nivel</label>
+        <select id="nivel" name="nivel" required>
+          <option value="">--Seleccione--</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <small class="error" id="err-nivel"></small>
+      </div>
+
+      <div class="row">
+        <label for="paralelo">Paralelo</label>
+        <input id="paralelo" name="paralelo" />
+        <small class="error" id="err-paralelo"></small>
+      </div>
+
+      <div class="actions">
+        <button type="submit">Guardar</button>
+        <button type="button" id="clearAll">Borrar todo</button>
+      </div>
+    </form>
+
+    <section class="list">
+      <h2>Estudiantes registrados</h2>
+      <table id="studentsTable">
+        <thead>
+          <tr>
+            <th>Cédula</th><th>Apellidos</th><th>Nombres</th><th>Facultad</th><th>Nivel</th><th>Paralelo</th><th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
