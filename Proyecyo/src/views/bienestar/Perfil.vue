@@ -9,31 +9,31 @@
 
     <div class="perfil-layout">
       <!-- Tarjeta lateral -->
-      <div>
+      <aside>
         <div class="perfil-card">
-          <div class="perfil-avatar" style="background:#d9f7e7; color:#047044;">{{ avatarInitials }}</div>
+          <div class="perfil-avatar">{{ avatarInitials }}</div>
           <h3>{{ user.nombres }} {{ user.apellidos }}</h3>
           <p>{{ user.correo }}</p>
-          <div class="perfil-badge" style="background:#d9f7e7; color:#047044;"><i class="fas fa-heartbeat"></i> Bienestar Estudiantil</div>
+          <div class="perfil-badge bienestar"><i class="fas fa-heartbeat"></i> Bienestar Estudiantil</div>
           <div class="perfil-stat">
             <div class="perfil-stat-item">
-              <strong style="color:var(--uleam-green)">{{ statEstudiantes }}</strong>
+              <strong>{{ statEstudiantes }}</strong>
               <span>Estudiantes</span>
             </div>
             <div class="perfil-stat-item">
-              <strong style="color:var(--uleam-green)">{{ statApoyos }}</strong>
+              <strong>{{ statApoyos }}</strong>
               <span>Apoyos</span>
             </div>
           </div>
         </div>
-      </div>
+      </aside>
 
       <!-- Formularios -->
-      <div>
+      <div class="perfil-main">
         <!-- Datos personales -->
         <div class="form-section">
           <div class="form-section-header">
-            <i class="fas fa-user" style="color:var(--uleam-green)"></i>
+            <i class="fas fa-user"></i>
             <h3>Datos personales</h3>
           </div>
           <div class="form-section-body">
@@ -54,7 +54,7 @@
                   <input type="email" id="i-correo" :value="user.correo" disabled>
                 </div>
               </div>
-              <div style="text-align:right; margin-top:16px">
+              <div class="form-section-actions">
                 <button type="submit" class="primary-action"><i class="fas fa-save"></i> Guardar</button>
               </div>
             </form>
@@ -64,7 +64,7 @@
         <!-- Cambiar contraseña -->
         <div class="form-section">
           <div class="form-section-header">
-            <i class="fas fa-lock" style="color:var(--uleam-green)"></i>
+            <i class="fas fa-lock"></i>
             <h3>Cambiar contraseña</h3>
           </div>
           <div class="form-section-body">
@@ -101,7 +101,7 @@
                   <span class="frm-error" v-if="errors.confirmar">{{ errors.confirmar }}</span>
                 </div>
               </div>
-              <div style="text-align:right; margin-top:16px">
+              <div class="form-section-actions">
                 <button type="submit" class="primary-action"><i class="fas fa-key"></i> Cambiar</button>
               </div>
             </form>

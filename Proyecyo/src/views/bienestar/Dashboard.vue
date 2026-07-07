@@ -46,20 +46,18 @@
         <!-- Alertas de riesgo -->
         <article class="dashboard-panel">
           <h2>Alertas de riesgo</h2>
-          <div style="padding:14px 20px 18px">
-            <p v-if="alertasRiesgo.length === 0" style="color:#94a3b8; font-size:13px">Sin alertas activas.</p>
-            <div 
-              v-for="alerta in alertasRiesgo" 
-              :key="alerta.id" 
+          <div class="alerta-list-body">
+            <p v-if="alertasRiesgo.length === 0" class="alerta-empty">Sin alertas activas.</p>
+            <div
+              v-for="alerta in alertasRiesgo"
+              :key="alerta.id"
               class="alerta-item"
               :class="alerta.nivelRiesgo === 'Alto' ? 'high' : 'medium'"
-              style="display:flex; gap:12px; align-items:flex-start; padding:12px 14px; border-radius:8px; margin-bottom:8px; font-size:13px;"
-              :style="alerta.nivelRiesgo === 'Alto' ? 'background:#fff1f2;color:#b42335' : 'background:#fff8e1;color:#9a5c00'"
             >
-              <i class="fas fa-exclamation-circle" style="margin-top:2px; flex-shrink:0;"></i>
+              <i class="fas fa-exclamation-circle"></i>
               <div>
                 <strong>{{ alerta.nombres }} {{ alerta.apellidos }}</strong>
-                <span>Riesgo {{ alerta.nivelRiesgo }} &mdash; {{ alerta.tipoDiscapacidad || '—' }} &mdash; {{ alerta.carrera }}</span>
+                <span>Riesgo {{ alerta.nivelRiesgo }} — {{ alerta.tipoDiscapacidad || '—' }} — {{ alerta.carrera }}</span>
               </div>
             </div>
           </div>
@@ -69,16 +67,19 @@
         <!-- Accesos rápidos -->
         <article class="dashboard-panel">
           <h2>Accesos rápidos</h2>
-          <div style="padding:16px 20px 20px">
+          <div class="dashboard-panel-body">
             <div class="acceso-grid">
               <router-link to="/bienestar/seguimiento" class="acceso-btn">
-                <i class="fas fa-plus-circle"></i>Nuevo seguimiento
+                <i class="fas fa-plus-circle"></i>
+                Nuevo seguimiento
               </router-link>
-              <router-link to="/bienestar/adaptaciones" class="acceso-btn">
-                <i class="fas fa-tools"></i>Adaptaciones
+              <router-link to="/bienestar/adaptaciones" class="acceso-btn accent-blue">
+                <i class="fas fa-tools"></i>
+                Adaptaciones
               </router-link>
-              <router-link to="/bienestar/reportes" class="acceso-btn">
-                <i class="fas fa-file-alt"></i>Reportes
+              <router-link to="/bienestar/reportes" class="acceso-btn accent-purple">
+                <i class="fas fa-file-alt"></i>
+                Reportes
               </router-link>
             </div>
           </div>

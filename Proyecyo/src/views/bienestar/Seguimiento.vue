@@ -9,57 +9,56 @@
 
     <div class="bien-layout">
       <!-- Lista lateral de estudiantes -->
-      <div class="bien-sidebar-panel">
+      <aside class="bien-sidebar-panel">
         <article class="dashboard-panel">
-          <h2 style="padding:16px 16px 8px">Estudiantes</h2>
-          <div style="padding:0 14px 8px">
-            <div class="input-with-icon" style="position:relative">
-              <i class="fas fa-search" style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:#94a3b8"></i>
-              <input 
-                type="search" 
-                v-model="filtroLateral" 
-                placeholder="Buscar..." 
-                style="width:100%; min-height:36px; border:1px solid #d8e2ef; border-radius:6px; padding:0 10px 0 34px; font-size:13px"
+          <h2>Estudiantes</h2>
+          <div class="dashboard-panel-body">
+            <div class="panel-search">
+              <i class="fas fa-search"></i>
+              <input
+                type="search"
+                v-model="filtroLateral"
+                placeholder="Buscar estudiante..."
               />
             </div>
-          </div>
-          <div class="est-list" style="max-height:400px; overflow-y:auto;">
-            <p v-if="estudiantesFiltrados.length === 0" style="color:#94a3b8; font-size:13px; padding:8px">Sin resultados.</p>
-            <div 
-              v-for="e in estudiantesFiltrados" 
-              :key="e.id" 
-              class="est-list-item"
-              :class="{ selected: e.id === estudianteSeleccionadoId }"
-              @click="seleccionarEstudiante(e.id)"
-            >
-              <div class="est-av-sm">{{ obtenerIniciales(e.nombres, e.apellidos) }}</div>
-              <div>
-                <strong>{{ e.nombres }} {{ e.apellidos }}</strong>
-                <span>
-                  <span class="priority-badge" :class="claseNivelRiesgo(e.nivelRiesgo)" style="font-size:10px; padding:1px 6px;">{{ e.nivelRiesgo }}</span>
-                </span>
+            <div class="est-list">
+              <p v-if="estudiantesFiltrados.length === 0" class="est-list-empty">Sin resultados.</p>
+              <div
+                v-for="e in estudiantesFiltrados"
+                :key="e.id"
+                class="est-list-item"
+                :class="{ selected: e.id === estudianteSeleccionadoId }"
+                @click="seleccionarEstudiante(e.id)"
+              >
+                <div class="est-av-sm">{{ obtenerIniciales(e.nombres, e.apellidos) }}</div>
+                <div>
+                  <strong>{{ e.nombres }} {{ e.apellidos }}</strong>
+                  <span>
+                    <span class="priority-badge" :class="claseNivelRiesgo(e.nivelRiesgo)">{{ e.nivelRiesgo }}</span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </article>
-      </div>
+      </aside>
 
       <!-- Panel de detalles -->
-      <article class="dashboard-panel" style="min-height:400px; flex: 1;">
-        <div v-if="!estudianteSeleccionadoId" class="sin-sel" style="padding:40px 20px; text-align:center; color:#94a3b8;">
-          <i class="fas fa-user-circle" style="font-size:36px; margin-bottom:10px; display:block;"></i>
+      <article class="dashboard-panel bien-detail-panel">
+        <div v-if="!estudianteSeleccionadoId" class="sin-sel">
+          <i class="fas fa-user-circle"></i>
           Selecciona un estudiante de la lista para ver su seguimiento integral.
         </div>
-        <div v-else style="padding:20px 24px">
+        <div v-else class="dashboard-panel-body">
           <!-- Encabezado del estudiante -->
-          <div style="display:flex; align-items:center; gap:14px; background:#f8fafc; border-radius:8px; padding:14px; margin-bottom:18px">
-            <div style="display:grid; place-items:center; width:48px; height:48px; border-radius:50%; background:#d5f5de; color:var(--uleam-green); font-weight:700; font-size:18px; flex-shrink:0;">
+          <div class="seg-est-header">
+            <div class="seg-est-avatar">
               {{ obtenerIniciales(estudianteActual.nombres, estudianteActual.apellidos) }}
             </div>
-            <div>
-              <strong style="font-size:15px; color:#111827">{{ estudianteActual.nombres }} {{ estudianteActual.apellidos }}</strong><br>
-              <span style="color:#64748b; font-size:13px;">
-                {{ estudianteActual.carrera }} &mdash; 
+            <div class="seg-est-info">
+              <strong>{{ estudianteActual.nombres }} {{ estudianteActual.apellidos }}</strong>
+              <span>
+                {{ estudianteActual.carrera }} —
                 <span class="priority-badge" :class="claseNivelRiesgo(estudianteActual.nivelRiesgo)">{{ estudianteActual.nivelRiesgo }}</span>
               </span>
             </div>
@@ -67,78 +66,77 @@
 
           <!-- Pestañas internas -->
           <div class="detalle-tabs">
-            <button class="detalle-tab" :class="{ active: activeTab === 'apoyos' }" @click="activeTab = 'apoyos'">Apoyos</button>
-            <button class="detalle-tab" :class="{ active: activeTab === 'observaciones' }" @click="activeTab = 'observaciones'">Observaciones</button>
-            <button class="detalle-tab" :class="{ active: activeTab === 'estado' }" @click="activeTab = 'estado'">Estado</button>
+            <button class="detalle-tab" :class="{ active: activeTab === 'apoyos' }" @click="activeTab = 'apoyos'" type="button">Apoyos</button>
+            <button class="detalle-tab" :class="{ active: activeTab === 'observaciones' }" @click="activeTab = 'observaciones'" type="button">Observaciones</button>
+            <button class="detalle-tab" :class="{ active: activeTab === 'estado' }" @click="activeTab = 'estado'" type="button">Estado</button>
           </div>
 
           <!-- Contenido Apoyos -->
-          <div v-show="activeTab === 'apoyos'" class="dtab-panel active">
-            <div style="display:flex; justify-content:flex-end; margin-bottom:12px">
+          <div v-show="activeTab === 'apoyos'" class="dtab-panel">
+            <div class="dtab-actions">
               <button class="primary-action" @click="abrirNuevoApoyo" type="button">
                 <i class="fas fa-plus"></i> Nuevo apoyo
               </button>
             </div>
             <div v-if="apoyos.length > 0">
-              <div 
-                v-for="a in apoyos" 
+              <div
+                v-for="a in apoyos"
                 :key="a.id"
-                style="display:flex; align-items:flex-start; gap:12px; padding:12px; background:#f8fafc; border:1px solid #e5ebf2; border-radius:8px; margin-bottom:8px"
+                class="item-card-row"
               >
-                <div style="display:grid; place-items:center; width:36px; height:36px; border-radius:10px; background:#dbeafe; color:#0756bd; font-size:14px; flex-shrink:0;">
+                <div class="item-card-icon">
                   <i class="fas" :class="'fa-' + getIcoApoyo(a.tipo)"></i>
                 </div>
-                <div style="flex:1; min-width:0">
-                  <strong style="display:block; color:#111827; font-size:13px">
-                    {{ a.tipo }} &mdash; <span class="status" :class="a.estado === 'Activo' ? 'active' : 'inactive'" style="font-size:11px; padding:2px 8px">{{ a.estado }}</span>
+                <div class="item-card-content">
+                  <strong>
+                    {{ a.tipo }} —
+                    <span class="status" :class="a.estado === 'Activo' ? 'active' : 'inactive'">{{ a.estado }}</span>
                   </strong>
-                  <span style="display:block; color:#374151; font-size:12px; margin-top:3px">{{ a.descripcion || '—' }}</span>
-                  <span style="display:block; color:#94a3b8; font-size:11px; margin-top:2px">{{ a.fechaInicio || '—' }} &mdash; {{ a.fechaFin || 'Indefinido' }} | {{ a.responsable || '—' }}</span>
+                  <span>{{ a.descripcion || '—' }}</span>
+                  <span class="meta">{{ a.fechaInicio || '—' }} — {{ a.fechaFin || 'Indefinido' }} | {{ a.responsable || '—' }}</span>
                 </div>
-                <div style="display:flex; gap:4px; flex-shrink:0;">
-                  <button class="action-btn edit" @click="editarApoyo(a)" title="Editar"><i class="fas fa-edit"></i></button>
-                  <button class="action-btn delete" @click="confirmarEliminarApoyo(a)" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
+                <div class="item-card-actions">
+                  <button class="action-btn edit" @click="editarApoyo(a)" title="Editar" type="button"><i class="fas fa-edit"></i></button>
+                  <button class="action-btn delete" @click="confirmarEliminarApoyo(a)" title="Eliminar" type="button"><i class="fas fa-trash-alt"></i></button>
                 </div>
               </div>
             </div>
-            <p v-else style="color:#94a3b8; font-size:13px; text-align:center; padding:18px">Sin apoyos registrados.</p>
+            <p v-else class="panel-empty">Sin apoyos registrados.</p>
           </div>
 
           <!-- Contenido Observaciones -->
-          <div v-show="activeTab === 'observaciones'" class="dtab-panel active">
-            <div style="display:flex; justify-content:flex-end; margin-bottom:12px">
+          <div v-show="activeTab === 'observaciones'" class="dtab-panel">
+            <div class="dtab-actions">
               <button class="primary-action" @click="abrirNuevaObs" type="button">
                 <i class="fas fa-plus"></i> Nueva observación
               </button>
             </div>
-            <div v-if="observaciones.length > 0">
-              <div class="bien-tl">
-                <div 
-                  v-for="o in observaciones" 
-                  :key="o.id" 
-                  class="bien-ti"
-                >
-                  <span class="bien-ti-fecha">{{ formatearFecha(o.fecha) }} &mdash; {{ o.tipo }}</span>
-                  <div class="bien-ti-card">
-                    <strong>
-                      {{ o.tipo }} &mdash; 
-                      <span class="priority-badge" :class="claseNivelRiesgo(o.nivelRiesgo)">{{ o.nivelRiesgo }}</span>
-                    </strong>
-                    <p style="margin:4px 0;">{{ o.contenido }}</p>
-                    <div style="display:flex; justify-content:flex-end; margin-top:8px">
-                      <button class="action-btn delete" @click="confirmarEliminarObs(o)" title="Eliminar observación" style="color:#ef233c"><i class="fas fa-trash-alt"></i></button>
-                    </div>
+            <div v-if="observaciones.length > 0" class="bien-tl">
+              <div
+                v-for="o in observaciones"
+                :key="o.id"
+                class="bien-ti"
+              >
+                <span class="bien-ti-fecha">{{ formatearFecha(o.fecha) }} — {{ o.tipo }}</span>
+                <div class="bien-ti-card">
+                  <strong>
+                    {{ o.tipo }} —
+                    <span class="priority-badge" :class="claseNivelRiesgo(o.nivelRiesgo)">{{ o.nivelRiesgo }}</span>
+                  </strong>
+                  <p>{{ o.contenido }}</p>
+                  <div class="bien-ti-actions">
+                    <button class="action-btn delete" @click="confirmarEliminarObs(o)" title="Eliminar observación" type="button"><i class="fas fa-trash-alt"></i></button>
                   </div>
                 </div>
               </div>
             </div>
-            <p v-else style="color:#94a3b8; font-size:13px; text-align:center; padding:18px">Sin observaciones.</p>
+            <p v-else class="panel-empty">Sin observaciones.</p>
           </div>
 
           <!-- Contenido Estado / Riesgo -->
-          <div v-show="activeTab === 'estado'" class="dtab-panel active">
+          <div v-show="activeTab === 'estado'" class="dtab-panel">
             <form @submit.prevent="guardarEstadoEstudiante">
-              <div class="mf-grid" style="margin-bottom:14px">
+              <div class="mf-grid">
                 <div class="mf-field">
                   <label for="bien-sel-estado">Estado del estudiante</label>
                   <select id="bien-sel-estado" v-model="formEstado.estado">
@@ -157,10 +155,10 @@
                 </div>
                 <div class="mf-field full">
                   <label for="bien-recom">Recomendaciones</label>
-                  <textarea id="bien-recom" v-model="formEstado.recomendaciones" style="min-height:80px; resize:vertical;"></textarea>
+                  <textarea id="bien-recom" v-model="formEstado.recomendaciones" rows="4"></textarea>
                 </div>
               </div>
-              <div style="text-align:right">
+              <div class="form-section-actions">
                 <button type="submit" class="primary-action"><i class="fas fa-save"></i> Actualizar estado</button>
               </div>
             </form>

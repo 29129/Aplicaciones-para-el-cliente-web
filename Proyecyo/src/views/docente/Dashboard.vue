@@ -46,15 +46,14 @@
         <!-- Alertas académicas -->
         <article class="dashboard-panel">
           <h2>Alertas académicas</h2>
-          <div style="padding:14px 20px 18px">
-            <p v-if="alertasRiesgo.length === 0" style="color:#94a3b8; font-size:13px">Sin alertas activas.</p>
-            <div 
-              v-for="alerta in alertasRiesgo" 
-              :key="alerta.id" 
+          <div class="alerta-list-body">
+            <p v-if="alertasRiesgo.length === 0" class="alerta-empty">Sin alertas activas.</p>
+            <div
+              v-for="alerta in alertasRiesgo"
+              :key="alerta.id"
               class="alerta-card"
-              style="display:flex; gap:12px; align-items:flex-start; padding:14px; border-radius:8px; background:#fff1f2; color:#b42335; margin-bottom:10px; font-size:13px;"
             >
-              <i class="fas fa-exclamation-circle" style="margin-top:2px; flex-shrink:0;"></i>
+              <i class="fas fa-exclamation-circle"></i>
               <div>
                 <strong>{{ alerta.nombre }}</strong>
                 <span>{{ alerta.asignatura }} — En riesgo académico</span>
@@ -66,17 +65,17 @@
         <!-- Accesos rápidos -->
         <article class="dashboard-panel">
           <h2>Accesos rápidos</h2>
-          <div style="padding:16px 20px 20px">
+          <div class="dashboard-panel-body">
             <div class="acceso-grid">
               <router-link to="/docente/estudiantes" class="acceso-btn">
                 <i class="fas fa-users"></i>
                 Mis estudiantes
               </router-link>
-              <router-link to="/docente/seguimiento" class="acceso-btn">
+              <router-link to="/docente/seguimiento" class="acceso-btn accent-blue">
                 <i class="fas fa-plus-circle"></i>
                 Nuevo seguimiento
               </router-link>
-              <router-link to="/docente/historial" class="acceso-btn">
+              <router-link to="/docente/historial" class="acceso-btn accent-purple">
                 <i class="fas fa-history"></i>
                 Ver historial
               </router-link>

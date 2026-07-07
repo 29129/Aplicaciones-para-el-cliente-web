@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <section>
     <section class="page-heading">
       <div>
@@ -62,7 +62,7 @@
       </nav>
     </section>
 
-    <div v-if="detalle" class="modal-overlay" @click.self="detalle = null">
+    <div v-if="detalle" class="modal-overlay visible" @click.self="detalle = null">
       <div class="modal-card">
         <header class="modal-header">
           <h2>Detalle del estudiante</h2>
@@ -84,7 +84,7 @@
       </div>
     </div>
 
-    <div v-if="aEliminar" class="modal-overlay" @click.self="aEliminar = null">
+    <div v-if="aEliminar" class="modal-overlay visible" @click.self="aEliminar = null">
       <div class="modal-card modal-sm">
         <header class="modal-header"><h2>Confirmar eliminación</h2></header>
         <div class="modal-body"><p>¿Eliminar a {{ nombreCompleto(aEliminar) }}?</p></div>

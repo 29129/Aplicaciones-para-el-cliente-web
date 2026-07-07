@@ -12,7 +12,8 @@ const STORAGE_KEYS = {
     ADAPTACIONES: 'uleam_adaptaciones',
     SESION: 'uleam_sesion',
     CONFIG: 'uleam_config',
-    REPORTES: 'uleam_reportes'
+    REPORTES: 'uleam_reportes',
+    NOTIF_DESCARTADAS: 'uleam_notif_descartadas'
 };
 
 /** Roles permitidos en el sistema */
@@ -1009,6 +1010,28 @@ function eliminarReporte(id) {
     return { exito: true, mensaje: 'Reporte eliminado correctamente.' };
 }
 
+/** IDs de notificaciones descartadas por el usuario en la campana. */
+function obtenerNotificacionesDescartadas() {
+    return leerStorage(STORAGE_KEYS.NOTIF_DESCARTADAS, []);
+}
+
+function descartarNotificacion(id) {
+    const ids = obtenerNotificacionesDescartadas();
+    if (!ids.includes(id)) {
+        ids.push(id);
+        guardarStorage(STORAGE_KEYS.NOTIF_DESCARTADAS, ids);
+    }
+}
+
+function descartarTodasNotificaciones(ids) {
+    const actuales = new Set([...obtenerNotificacionesDescartadas(), ...ids]);
+    guardarStorage(STORAGE_KEYS.NOTIF_DESCARTADAS, [...actuales]);
+}
+
+function restaurarNotificacionesDescartadas() {
+    guardarStorage(STORAGE_KEYS.NOTIF_DESCARTADAS, []);
+}
+
 export {
     STORAGE_KEYS,
     ROLES,
@@ -1072,5 +1095,9 @@ export {
     obtenerReportes,
     guardarReportes,
     crearReporte,
-    eliminarReporte
+    eliminarReporte,
+    obtenerNotificacionesDescartadas,
+    descartarNotificacion,
+    descartarTodasNotificaciones,
+    restaurarNotificacionesDescartadas
 };

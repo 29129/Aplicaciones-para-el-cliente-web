@@ -103,14 +103,37 @@
         <div class="modal-body">
           <form @submit.prevent="guardarAdaptacionForm" novalidate>
             <div class="mf-grid">
-              <div class="mf-field required full" :class="{ 'is-invalid': errors.estudianteId }">
+              <div class="mf-field required full student-search-field" :class="{ 'is-invalid': errors.estudianteId }">
                 <label for="adapt-est">Estudiante</label>
-                <select id="adapt-est" v-model="formAdapt.estudianteId" :disabled="formAdapt.id">
-                  <option value="">Seleccionar...</option>
-                  <option v-for="e in estudiantes" :key="e.id" :value="e.id">
-                    {{ e.nombres }} {{ e.apellidos }}
-                  </option>
-                </select>
+                <div class="student-search-wrap">
+                  <input
+                    id="adapt-est"
+                    type="text"
+                    v-model="busquedaEstudiante"
+                    @input="onBusquedaEstudiante"
+                    @focus="mostrarListaEst = true"
+                    @blur="cerrarListaEst"
+                    placeholder="Escriba nombre, apellido o cédula..."
+                    :disabled="!!formAdapt.id"
+                    autocomplete="off"
+                  />
+                  <ul
+                    v-if="mostrarListaEst && !formAdapt.id && estudiantesSugeridos.length"
+                    class="student-search-list"
+                  >
+                    <li
+                      v-for="e in estudiantesSugeridos"
+                      :key="e.id"
+                      @mousedown.prevent="seleccionarEstudiante(e)"
+                    >
+                      <strong>{{ e.nombres }} {{ e.apellidos }}</strong>
+                      <span>{{ e.cedula }} · {{ e.carrera || 'Sin carrera' }}</span>
+                    </li>
+                  </ul>
+                  <p v-if="!estudiantes.length" class="student-search-hint">
+                    No hay estudiantes registrados. Solicite el registro desde administración.
+                  </p>
+                </div>
                 <span class="mf-error" v-if="errors.estudianteId">{{ errors.estudianteId }}</span>
               </div>
               <div class="mf-field required">
@@ -210,6 +233,8 @@ const formAdapt = ref({
   observaciones: ''
 });
 
+const busquedaEstudiante = ref('');
+const mostrarListaEst = ref(false);
 const errors = ref({ estudianteId: '', descripcion: '' });
 
 onMounted(() => {
@@ -242,6 +267,57 @@ function getEstudianteNombre(id) {
   return est ? `${est.nombres} ${est.apellidos}` : 'Desconocido';
 }
 
+const estudiantesSugeridos = computed(() => {
+  const query = normalizarTexto(busquedaEstudiante.value.trim());
+  const lista = estudiantes.value;
+
+  if (!query) return lista.slice(0, 8);
+
+  return lista.filter((e) => {
+    const texto = normalizarTexto(`${e.nombres} ${e.apellidos} ${e.cedula}`);
+    return texto.includes(query);
+  }).slice(0, 8);
+});
+
+function onBusquedaEstudiante() {
+  mostrarListaEst.value = true;
+  formAdapt.value.estudianteId = '';
+}
+
+function seleccionarEstudiante(est) {
+  formAdapt.value.estudianteId = est.id;
+  busquedaEstudiante.value = `${est.nombres} ${est.apellidos}`;
+  mostrarListaEst.value = false;
+  errors.value.estudianteId = '';
+}
+
+function cerrarListaEst() {
+  window.setTimeout(() => {
+    mostrarListaEst.value = false;
+  }, 150);
+}
+
+function resolverEstudianteDesdeTexto() {
+  if (formAdapt.value.estudianteId) return true;
+
+  const query = normalizarTexto(busquedaEstudiante.value.trim());
+  if (!query) return false;
+
+  const coincidencia = estudiantes.value.find((e) => {
+    const nombre = normalizarTexto(`${e.nombres} ${e.apellidos}`);
+    const cedula = normalizarTexto(e.cedula);
+    return nombre === query || cedula === query || nombre.includes(query);
+  });
+
+  if (coincidencia) {
+    formAdapt.value.estudianteId = coincidencia.id;
+    busquedaEstudiante.value = `${coincidencia.nombres} ${coincidencia.apellidos}`;
+    return true;
+  }
+
+  return false;
+}
+
 function limpiarFiltros() {
   filtroBusqueda.value = '';
   filtroTipo.value = '';
@@ -257,12 +333,17 @@ function abrirNuevaAdaptacion() {
     descripcion: '',
     observaciones: ''
   };
+  busquedaEstudiante.value = '';
+  mostrarListaEst.value = false;
   errors.value = { estudianteId: '', descripcion: '' };
   modalVisible.value = true;
 }
 
 function editarAdaptacion(a) {
   formAdapt.value = { ...a };
+  const est = estudiantes.value.find(e => e.id === a.estudianteId);
+  busquedaEstudiante.value = est ? `${est.nombres} ${est.apellidos}` : '';
+  mostrarListaEst.value = false;
   errors.value = { estudianteId: '', descripcion: '' };
   modalVisible.value = true;
 }
@@ -275,8 +356,8 @@ function validarForm() {
   let valido = true;
   errors.value = { estudianteId: '', descripcion: '' };
 
-  if (!Validaciones.requerido(formAdapt.value.estudianteId)) {
-    errors.value.estudianteId = 'Selecciona un estudiante.';
+  if (!resolverEstudianteDesdeTexto()) {
+    errors.value.estudianteId = 'Selecciona o escribe un estudiante válido.';
     valido = false;
   }
   if (!Validaciones.requerido(formAdapt.value.descripcion)) {

@@ -9,12 +9,12 @@
 
     <div class="perfil-layout">
       <!-- Tarjeta lateral -->
-      <div>
+      <aside>
         <div class="perfil-card">
           <div class="perfil-avatar">{{ avatarInitials }}</div>
           <h3>{{ user.nombres }} {{ user.apellidos }}</h3>
           <p>{{ user.correo }}</p>
-          <div class="perfil-badge"><i class="fas fa-shield-alt"></i> Administrador</div>
+          <div class="perfil-badge admin"><i class="fas fa-shield-alt"></i> Administrador</div>
           <div class="perfil-stat">
             <div class="perfil-stat-item">
               <strong>{{ statEstudiantes }}</strong><span>Estudiantes</span>
@@ -27,14 +27,14 @@
             </div>
           </div>
         </div>
-      </div>
+      </aside>
 
       <!-- Formularios -->
-      <div>
+      <div class="perfil-main">
         <!-- Datos personales -->
         <div class="form-section">
           <div class="form-section-header">
-            <i class="fas fa-user" style="color:var(--uleam-green)"></i>
+            <i class="fas fa-user"></i>
             <h3>Datos personales</h3>
           </div>
           <div class="form-section-body">
@@ -59,7 +59,7 @@
                   <input type="text" id="i-rol" value="Administrador" disabled>
                 </div>
               </div>
-              <div style="text-align:right; margin-top:16px">
+              <div class="form-section-actions">
                 <button type="submit" class="primary-action"><i class="fas fa-save"></i> Guardar datos</button>
               </div>
             </form>
@@ -69,7 +69,7 @@
         <!-- Cambiar contraseña -->
         <div class="form-section">
           <div class="form-section-header">
-            <i class="fas fa-lock" style="color:var(--uleam-green)"></i>
+            <i class="fas fa-lock"></i>
             <h3>Cambiar contraseña</h3>
           </div>
           <div class="form-section-body">
@@ -106,7 +106,7 @@
                   <span class="frm-error" v-if="errors.confirmar">{{ errors.confirmar }}</span>
                 </div>
               </div>
-              <div style="text-align:right; margin-top:16px">
+              <div class="form-section-actions">
                 <button type="submit" class="primary-action"><i class="fas fa-key"></i> Cambiar contraseña</button>
               </div>
             </form>
@@ -116,12 +116,12 @@
         <!-- Actividad reciente -->
         <div class="form-section">
           <div class="form-section-header">
-            <i class="fas fa-history" style="color:var(--uleam-green)"></i>
+            <i class="fas fa-history"></i>
             <h3>Actividad reciente del sistema</h3>
           </div>
           <div class="form-section-body">
             <div class="actividad-list">
-              <p v-if="actividades.length === 0" style="color:#94a3b8; font-size:13px">Sin actividad reciente.</p>
+              <p v-if="actividades.length === 0" class="actividad-empty">Sin actividad reciente.</p>
               <div 
                 v-for="(a, idx) in actividades" 
                 :key="idx" 
@@ -129,8 +129,8 @@
               >
                 <i class="fas" :class="'fa-' + a.ico"></i>
                 <div>
-                  <span style="color:#111827">{{ a.txt }}</span>
-                  <span style="display:block; color:#94a3b8; font-size:11px; margin-top:2px">{{ formatearFecha(a.fecha) }}</span>
+                  <span class="actividad-item-text">{{ a.txt }}</span>
+                  <span class="actividad-item-date">{{ formatearFecha(a.fecha) }}</span>
                 </div>
               </div>
             </div>

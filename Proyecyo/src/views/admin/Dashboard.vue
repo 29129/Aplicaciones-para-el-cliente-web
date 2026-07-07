@@ -186,7 +186,7 @@
     <!-- Modal Detalle Rápido -->
     <div 
       v-if="detalleEstudiante" 
-      class="modal-overlay" 
+      class="modal-overlay visible" 
       @click.self="detalleEstudiante = null"
     >
       <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
@@ -219,7 +219,7 @@
     <!-- Modal Eliminar -->
     <div 
       v-if="estudianteAEliminar" 
-      class="modal-overlay" 
+      class="modal-overlay visible" 
       @click.self="estudianteAEliminar = null"
     >
       <div class="modal-card modal-sm" role="alertdialog" aria-labelledby="modal-eliminar-titulo">
